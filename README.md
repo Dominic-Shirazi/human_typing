@@ -4,7 +4,7 @@ A Python project that realistically simulates human typing behavior. Rather than
 
 This tool is designed to be called by external scripts to enter text into any focused window as if a human was sitting at the keyboard typing it out.
 
-![alt text](Demo.gif)
+![Demo](demo/Demo.gif)
 
 ## Features
 
