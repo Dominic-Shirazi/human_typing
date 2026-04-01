@@ -86,11 +86,11 @@ class HumanTyper:
                 self._type_char(wrong_char)
 
                 # Realization pause (takes a moment to notice mistake)
-                time.sleep(self._get_delay(char, text, i) * 1.5)
+                time.sleep(self._get_delay(char, text, i) * 4)
 
                 # Correct it (time for corrections is distinct from the base WPM pace)
                 keyboard.send("backspace")
-                time.sleep(self.base_delay * 0.8)
+                time.sleep(self.base_delay * 3)
 
                 # Type the correct char
                 self._type_char(char)
@@ -115,13 +115,15 @@ class HumanTyper:
 
     def _get_delay(self, current_char, full_text, idx):
         """Calculate dynamic delay for current keystroke."""
-        # Burst typing cadence: 
+        # Burst typing cadence:
         # Fast typists often "burst" through words because their fingers know the word,
         # but pause between words to think of the next one.
         # A standard mathematical word is 5 characters (4 letters + 1 space).
         # We make letters type much faster, and compensate by making the space pause longer.
         burst_factor = 0.5  # Letters are typed ~2.0x faster than the base average WPM
-        space_factor = 5.0 - (4.0 * burst_factor) # Space takes the remainder of the 5-char block (3.0x base)
+        space_factor = 5.0 - (
+            4.0 * burst_factor
+        )  # Space takes the remainder of the 5-char block (3.0x base)
 
         if current_char == " ":
             delay = self.base_delay * space_factor
